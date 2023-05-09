@@ -1,21 +1,29 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "typeRoots": ["./@types", "./node_modules/@types"],
+    "resolveJsonModule": false,
     "declaration": true,
     "removeComments": true,
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "incremental": true,
+    "esModuleInterop": true,
+    "baseUrl": "src"
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "out",
+    ".babelrc",
+    "bundles",
+    "coverage",
+    "test/*"
+  ]
 }

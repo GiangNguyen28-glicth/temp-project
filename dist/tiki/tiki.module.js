@@ -6,17 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MailModule = void 0;
+exports.TikiModule = void 0;
 const common_1 = require("@nestjs/common");
-const mail_service_1 = require("./mail.service");
-const mail_controller_1 = require("./mail.controller");
-let MailModule = class MailModule {
+const tiki_service_1 = require("./tiki.service");
+const tiki_controller_1 = require("./tiki.controller");
+const mongoose_1 = require("@nestjs/mongoose");
+const product_item_1 = require("../entities/product-item");
+let TikiModule = class TikiModule {
 };
-MailModule = __decorate([
+TikiModule = __decorate([
     (0, common_1.Module)({
-        controllers: [mail_controller_1.MailController],
-        providers: [mail_service_1.MailService],
+        imports: [
+            mongoose_1.MongooseModule.forFeature([
+                { name: product_item_1.ProductItem.name, schema: product_item_1.ProductSchema },
+            ]),
+        ],
+        controllers: [tiki_controller_1.TikiController],
+        providers: [tiki_service_1.TikiService, common_1.Logger],
     })
-], MailModule);
-exports.MailModule = MailModule;
-//# sourceMappingURL=mail.module.js.map
+], TikiModule);
+exports.TikiModule = TikiModule;
+//# sourceMappingURL=tiki.module.js.map
