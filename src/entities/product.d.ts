@@ -10,4 +10,5 @@ export class IProductItem {
   next_crawl_time?: Date;
   count_failed?: number;
   raw_data?: string;
+  crawled_date?: Date;
 }

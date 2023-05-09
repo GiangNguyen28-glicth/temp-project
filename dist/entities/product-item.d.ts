@@ -37,5 +37,6 @@ export declare class ProductItem implements IProductItem {
     next_crawl_time?: Date;
     count_failed?: number;
     raw_data?: string;
+    crawled_date?: Date;
 }
 export declare const ProductSchema: import("mongoose").Schema<ProductItem, Model<ProductItem, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, ProductItem>;

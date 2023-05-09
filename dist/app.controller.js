@@ -21,10 +21,20 @@ let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
     }
+    healthCheck() {
+        return 'Is Health Check';
+    }
     async addProductItem(product_dto) {
         return this.appService.addProduct(product_dto);
     }
 };
+__decorate([
+    (0, common_1.Get)('health-check'),
+    openapi.ApiResponse({ status: 200, type: String }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", String)
+], AppController.prototype, "healthCheck", null);
 __decorate([
     (0, common_1.Post)('products'),
     openapi.ApiResponse({ status: 201, type: Boolean }),

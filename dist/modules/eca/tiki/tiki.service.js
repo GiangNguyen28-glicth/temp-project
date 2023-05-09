@@ -116,6 +116,7 @@ let TikiService = class TikiService {
         const { NEXT_CRAWL_TIME } = common_2.COMMON_CONFIG;
         entities.next_crawl_time = (0, utils_1.getNextCrawlTime)(NEXT_CRAWL_TIME.TIKI_PI_DETAIL);
         entities.status = common_2.Status.IDLE;
+        entities.crawled_date = new Date();
     }
 };
 TikiService = __decorate([

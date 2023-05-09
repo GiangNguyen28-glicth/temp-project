@@ -60,6 +60,10 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], ProductItem.prototype, "raw_data", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Date)
+], ProductItem.prototype, "crawled_date", void 0);
 ProductItem = __decorate([
     (0, mongoose_1.Schema)()
 ], ProductItem);

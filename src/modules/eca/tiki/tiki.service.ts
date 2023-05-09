@@ -130,5 +130,6 @@ export class TikiService implements OnModuleInit {
     const { NEXT_CRAWL_TIME } = COMMON_CONFIG;
     entities.next_crawl_time = getNextCrawlTime(NEXT_CRAWL_TIME.TIKI_PI_DETAIL);
     entities.status = Status.IDLE;
+    entities.crawled_date = new Date();
   }
 }

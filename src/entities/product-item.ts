@@ -40,5 +40,8 @@ export class ProductItem implements IProductItem {
 
   @Prop()
   raw_data?: string;
+
+  @Prop()
+  crawled_date?: Date;
 }
 export const ProductSchema = SchemaFactory.createForClass(ProductItem);
