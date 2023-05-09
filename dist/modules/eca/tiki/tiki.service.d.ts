@@ -1,14 +1,15 @@
 import { Logger, OnModuleInit } from '@nestjs/common';
 import { FilterProductItem } from 'common';
 import { Scraper } from 'scraper';
-import { ProductItem, ProductModel } from 'entities';
+import { ProductItem, ProductModel, ProxyModel } from 'entities';
 import { MailService } from 'modules/mail/mail.service';
 export declare class TikiService implements OnModuleInit {
     private productModel;
+    private proxyModel;
     private scraper;
     private logger;
     private mailService;
-    constructor(productModel: ProductModel, scraper: Scraper, logger: Logger, mailService: MailService);
+    constructor(productModel: ProductModel, proxyModel: ProxyModel, scraper: Scraper, logger: Logger, mailService: MailService);
     product_item_buffer: ProductItem[];
     proxy_index: number;
     proxies: string[];

@@ -20,6 +20,7 @@ TikiModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forFeature([
                 { name: entities_1.ProductItem.name, schema: entities_1.ProductSchema },
+                { name: Proxy.name, schema: entities_1.ProxySchema },
             ]),
             mail_module_1.MailModule,
         ],

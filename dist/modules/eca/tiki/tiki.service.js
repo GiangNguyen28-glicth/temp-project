@@ -22,8 +22,9 @@ const mapping_1 = require("../../../mapping");
 const entities_1 = require("../../../entities");
 const mail_service_1 = require("../../mail/mail.service");
 let TikiService = class TikiService {
-    constructor(productModel, scraper, logger, mailService) {
+    constructor(productModel, proxyModel, scraper, logger, mailService) {
         this.productModel = productModel;
+        this.proxyModel = proxyModel;
         this.scraper = scraper;
         this.logger = logger;
         this.mailService = mailService;
@@ -120,7 +121,8 @@ let TikiService = class TikiService {
 TikiService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(entities_1.ProductItem.name)),
-    __metadata("design:paramtypes", [Object, scraper_1.Scraper,
+    __param(1, (0, mongoose_1.InjectModel)(Proxy.name)),
+    __metadata("design:paramtypes", [Object, Object, scraper_1.Scraper,
         common_1.Logger,
         mail_service_1.MailService])
 ], TikiService);

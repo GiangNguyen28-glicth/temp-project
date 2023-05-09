@@ -4,13 +4,14 @@ import { COMMON_CONFIG, Domain, FilterProductItem, Status } from 'common';
 import { FilterBuilder, getNextCrawlTime } from 'utils';
 import { Scraper } from 'scraper';
 import { mappingDataTikiPI } from 'mapping';
-import { ProductItem, ProductModel } from 'entities';
+import { ProductItem, ProductModel, ProxyModel } from 'entities';
 import { MailService } from 'modules/mail/mail.service';
 
 @Injectable()
 export class TikiService implements OnModuleInit {
   constructor(
     @InjectModel(ProductItem.name) private productModel: ProductModel,
+    @InjectModel(Proxy.name) private proxyModel: ProxyModel,
     private scraper: Scraper,
     private logger: Logger,
     private mailService: MailService,
