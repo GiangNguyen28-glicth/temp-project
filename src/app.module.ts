@@ -1,12 +1,13 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MailModule } from './mail/mail.module';
-import { TikiModule } from './eca/tiki/tiki.module';
+import { MailModule } from './module/mail/mail.module';
+import { TikiModule } from './module/eca/tiki/tiki.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from './config/mongoose.config';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ProductItem, ProductSchema } from 'entities';
 
 @Module({
   imports: [
@@ -15,12 +16,15 @@ import { ScheduleModule } from '@nestjs/schedule';
     MongooseModule.forRootAsync({
       useClass: MongooseConfigService,
     }),
+    MongooseModule.forFeature([
+      { name: ProductItem.name, schema: ProductSchema },
+    ]),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, Logger],
 })
 export class AppModule {}

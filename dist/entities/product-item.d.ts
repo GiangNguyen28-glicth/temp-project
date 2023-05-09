@@ -23,16 +23,19 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Model } from 'mongoose';
-export type ProductSchema = Model<ProductItem>;
-export declare class ProductItem {
-    id: string;
-    link: string;
-    last_price: number;
-    last_sell_price: number;
-    source_id: string;
-    price_expect: number;
-    next_crawl_time: Date;
-    count_failed: number;
-    raw_data: string;
+import { Domain, Status } from '../common/interfaces/enum';
+import { IProductItem } from './product';
+export type ProductModel = Model<ProductItem>;
+export declare class ProductItem implements IProductItem {
+    id?: string;
+    link?: string;
+    last_price?: number;
+    last_sell_price?: number;
+    domain?: Domain;
+    status?: Status;
+    price_expect?: number;
+    next_crawl_time?: Date;
+    count_failed?: number;
+    raw_data?: string;
 }
 export declare const ProductSchema: import("mongoose").Schema<ProductItem, Model<ProductItem, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, ProductItem>;

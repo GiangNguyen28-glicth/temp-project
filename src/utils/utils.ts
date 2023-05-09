@@ -30,3 +30,9 @@ export function transformTextSearch(text: string): string {
   });
   return text.replace(/-/g, ' ');
 }
+
+export function getNextCrawlTime(rangeTime = 900) {
+  const addTime = rangeTime;
+  const now = new Date();
+  return new Date(now.getTime() + addTime);
+}

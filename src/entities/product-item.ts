@@ -6,39 +6,39 @@ export type ProductModel = Model<ProductItem>;
 @Schema()
 export class ProductItem implements IProductItem {
   @Prop()
-  id: string;
+  id?: string;
 
   @Prop()
-  link: string;
+  link?: string;
 
   @Prop()
-  last_price: number;
+  last_price?: number;
 
   @Prop({ type: Number })
-  last_sell_price: number;
+  last_sell_price?: number;
 
   @Prop({
     enum: Object.values(Domain),
     type: String,
   })
-  domain: Domain;
+  domain?: Domain;
 
   @Prop({
     enum: Object.values(Status),
     type: String,
   })
-  status: Status;
+  status?: Status;
 
   @Prop()
-  price_expect: number;
+  price_expect?: number;
 
   @Prop({ default: new Date() })
-  next_crawl_time: Date;
+  next_crawl_time?: Date;
 
   @Prop()
-  count_failed: number;
+  count_failed?: number;
 
   @Prop()
-  raw_data: string;
+  raw_data?: string;
 }
 export const ProductSchema = SchemaFactory.createForClass(ProductItem);

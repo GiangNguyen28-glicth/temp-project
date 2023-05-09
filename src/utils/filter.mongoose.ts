@@ -12,7 +12,7 @@ export class FilterBuilder<T> {
   setFilterItem(key: keyof T, query: QueryOperator, value: any) {
     if (!key || !value) return this;
     const subQuery = {
-      [key]: query,
+      [key]: { [query]: value },
     };
     this.queryFilter['$and'].push(subQuery);
     return this;
@@ -52,7 +52,11 @@ export class FilterBuilder<T> {
   }
 
   buildQuery(): BuildQuery {
-    if (!this.queryFilter?.$and?.length) return [{}, this.querySort];
+    if (!this.queryFilter?.$and?.length)
+      return {
+        filter: this.queryFilter,
+        sort: this.querySort,
+      };
     return {
       filter: this.queryFilter,
       sort: this.querySort,
