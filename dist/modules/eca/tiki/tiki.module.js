@@ -10,8 +10,8 @@ exports.TikiModule = void 0;
 const common_1 = require("@nestjs/common");
 const tiki_service_1 = require("./tiki.service");
 const mongoose_1 = require("@nestjs/mongoose");
-const product_item_1 = require("../../../entities/product-item");
-const scraper_1 = require("../../../scraper/scraper");
+const scraper_1 = require("../../../scraper");
+const entities_1 = require("../../../entities");
 const mail_module_1 = require("../../mail/mail.module");
 let TikiModule = class TikiModule {
 };
@@ -19,7 +19,7 @@ TikiModule = __decorate([
     (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forFeature([
-                { name: product_item_1.ProductItem.name, schema: product_item_1.ProductSchema },
+                { name: entities_1.ProductItem.name, schema: entities_1.ProductSchema },
             ]),
             mail_module_1.MailModule,
         ],

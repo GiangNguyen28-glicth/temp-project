@@ -10,20 +10,20 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const mail_module_1 = require("./module/mail/mail.module");
-const tiki_module_1 = require("./module/eca/tiki/tiki.module");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_config_1 = require("./config/mongoose.config");
 const config_1 = require("@nestjs/config");
 const schedule_1 = require("@nestjs/schedule");
 const entities_1 = require("./entities");
+const modules_1 = require("./modules");
+const mail_module_1 = require("./modules/mail/mail.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            modules_1.TikiModule,
             mail_module_1.MailModule,
-            tiki_module_1.TikiModule,
             mongoose_1.MongooseModule.forRootAsync({
                 useClass: mongoose_config_1.MongooseConfigService,
             }),

@@ -3,9 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { COMMON_CONFIG, Domain, FilterProductItem, Status } from 'common';
 import { FilterBuilder, getNextCrawlTime } from 'utils';
 import { Scraper } from 'scraper';
-import { MailService } from 'modules';
 import { mappingDataTikiPI } from 'mapping';
 import { ProductItem, ProductModel } from 'entities';
+import { MailService } from 'modules/mail/mail.service';
 
 @Injectable()
 export class TikiService implements OnModuleInit {

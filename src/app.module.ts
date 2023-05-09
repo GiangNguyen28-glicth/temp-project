@@ -6,12 +6,13 @@ import { MongooseConfigService } from './config/mongoose.config';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ProductItem, ProductSchema } from 'entities';
-import { TikiModule, MailModule } from 'modules';
+import { TikiModule } from 'modules';
+import { MailModule } from 'modules/mail/mail.module';
 
 @Module({
   imports: [
-    MailModule,
     TikiModule,
+    MailModule,
     MongooseModule.forRootAsync({
       useClass: MongooseConfigService,
     }),

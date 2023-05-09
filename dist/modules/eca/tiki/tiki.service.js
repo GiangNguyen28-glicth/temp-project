@@ -15,13 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TikiService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
+const common_2 = require("../../../common");
+const utils_1 = require("../../../utils");
+const scraper_1 = require("../../../scraper");
+const mapping_1 = require("../../../mapping");
 const entities_1 = require("../../../entities");
-const enum_1 = require("../../../common/interfaces/enum");
-const filter_mongoose_1 = require("../../../utils/filter.mongoose");
-const const_1 = require("../../../common/interfaces/const");
-const scraper_1 = require("../../../scraper/scraper");
-const tiki_mapping_1 = require("../../../mapping/product-items/tiki.mapping");
-const utils_1 = require("../../../utils/utils");
 const mail_service_1 = require("../../mail/mail.service");
 let TikiService = class TikiService {
     constructor(productModel, scraper, logger, mailService) {
@@ -41,17 +39,17 @@ let TikiService = class TikiService {
     filter() {
         return {
             next_crawl_time: new Date(),
-            domain: enum_1.Domain.TIKI,
-            status: enum_1.Status.IDLE,
+            domain: common_2.Domain.TIKI,
+            status: common_2.Status.IDLE,
         };
     }
     async findAll() {
-        const { MAX_PRODUCT_ITEM_BUFFER, DELAY_REQUEST_TO_DATABASE } = const_1.COMMON_CONFIG;
+        const { MAX_PRODUCT_ITEM_BUFFER, DELAY_REQUEST_TO_DATABASE } = common_2.COMMON_CONFIG;
         if (this.product_item_buffer.length > MAX_PRODUCT_ITEM_BUFFER) {
             setTimeout(this.findAll.bind(this), DELAY_REQUEST_TO_DATABASE);
         }
         const filter = this.filter();
-        const query = new filter_mongoose_1.FilterBuilder()
+        const query = new utils_1.FilterBuilder()
             .setFilterItem('domain', '$eq', filter.domain)
             .setFilterItem('status', '$eq', filter.status)
             .setFilterItem('next_crawl_time', '$lte', filter.next_crawl_time.toISOString())
@@ -61,14 +59,14 @@ let TikiService = class TikiService {
             .find(query.filter)
             .sort(query.sort);
         await Promise.all(products.map(item => {
-            item.status = enum_1.Status.UPDATING;
+            item.status = common_2.Status.UPDATING;
             return item.save();
         }));
         this.product_item_buffer = this.product_item_buffer.concat(products);
         setTimeout(this.findAll.bind(this), DELAY_REQUEST_TO_DATABASE);
     }
     async crawlProductItem() {
-        const { DELAY_REQUEST_TO_DOMAIN, DELAY_CRAWL_CONTENT } = const_1.COMMON_CONFIG;
+        const { DELAY_REQUEST_TO_DOMAIN, DELAY_CRAWL_CONTENT } = common_2.COMMON_CONFIG;
         try {
             if (this.product_item_buffer.length === 0) {
                 this.logger.debug('Buffer has no product item');
@@ -78,7 +76,7 @@ let TikiService = class TikiService {
             const product_item = this.product_item_buffer.splice(0, 1)[0];
             const url_request = this.buildUrlRequest(product_item.link);
             const data = await this.scraper.requestWithGetMethod(url_request);
-            const new_entities = (0, tiki_mapping_1.mappingDataTikiPI)(data);
+            const new_entities = (0, mapping_1.mappingDataTikiPI)(data);
             this.updatingNextCrawlTime(new_entities);
             await this.productModel.findOneAndUpdate({ id: product_item.id }, new_entities);
             if (new_entities.last_sell_price < product_item.price_expect) {
@@ -114,9 +112,9 @@ let TikiService = class TikiService {
         setTimeout(this.showInfo.bind(this), 30000);
     }
     updatingNextCrawlTime(entities) {
-        const { NEXT_CRAWL_TIME } = const_1.COMMON_CONFIG;
+        const { NEXT_CRAWL_TIME } = common_2.COMMON_CONFIG;
         entities.next_crawl_time = (0, utils_1.getNextCrawlTime)(NEXT_CRAWL_TIME.TIKI_PI_DETAIL);
-        entities.status = enum_1.Status.IDLE;
+        entities.status = common_2.Status.IDLE;
     }
 };
 TikiService = __decorate([

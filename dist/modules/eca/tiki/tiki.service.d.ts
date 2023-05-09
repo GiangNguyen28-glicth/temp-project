@@ -1,8 +1,8 @@
 import { Logger, OnModuleInit } from '@nestjs/common';
-import { ProductItem, ProductModel } from '../../../entities';
-import { FilterProductItem } from 'common/interfaces/common';
-import { Scraper } from 'scraper/scraper';
-import { MailService } from 'module/mail/mail.service';
+import { FilterProductItem } from 'common';
+import { Scraper } from 'scraper';
+import { ProductItem, ProductModel } from 'entities';
+import { MailService } from 'modules/mail/mail.service';
 export declare class TikiService implements OnModuleInit {
     private productModel;
     private scraper;

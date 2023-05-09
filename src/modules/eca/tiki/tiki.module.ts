@@ -1,9 +1,9 @@
 import { Logger, Module } from '@nestjs/common';
 import { TikiService } from './tiki.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductItem, ProductSchema } from '../../../entities/product-item';
-import { Scraper } from 'scraper/scraper';
-import { MailModule } from 'module/mail/mail.module';
+import { Scraper } from 'scraper';
+import { ProductItem, ProductSchema } from 'entities';
+import { MailModule } from 'modules/mail/mail.module';
 
 @Module({
   imports: [
