@@ -1,14 +1,11 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ProductItem, ProductModel } from '../../../entities';
-import { Domain, Status } from 'common/interfaces/enum';
-import { FilterBuilder } from 'utils/filter.mongoose';
-import { FilterProductItem } from 'common/interfaces/common';
-import { COMMON_CONFIG } from 'common/interfaces/const';
-import { Scraper } from 'scraper/scraper';
-import { mappingDataTikiPI } from 'mapping/product-items/tiki.mapping';
-import { getNextCrawlTime } from 'utils/utils';
-import { MailService } from 'module/mail/mail.service';
+import { COMMON_CONFIG, Domain, FilterProductItem, Status } from 'common';
+import { FilterBuilder, getNextCrawlTime } from 'utils';
+import { Scraper } from 'scraper';
+import { MailService } from 'modules';
+import { mappingDataTikiPI } from 'mapping';
+import { ProductItem, ProductModel } from 'entities';
 
 @Injectable()
 export class TikiService implements OnModuleInit {
@@ -19,6 +16,8 @@ export class TikiService implements OnModuleInit {
     private mailService: MailService,
   ) {}
   product_item_buffer: ProductItem[] = [];
+  proxy_index = 0;
+  proxies: string[] = [];
 
   async onModuleInit() {
     await this.findAll();

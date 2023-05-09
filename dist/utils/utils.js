@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getNextCrawlTime = exports.transformTextSearch = exports.toKeyword = exports.toSlug = void 0;
+exports.nextProxy = exports.getNextCrawlTime = exports.transformTextSearch = exports.toKeyword = exports.toSlug = void 0;
 const enum_1 = require("../common/interfaces/enum");
 const slugify_1 = __importDefault(require("slugify"));
 function toSlug(text, locale) {
@@ -45,4 +45,13 @@ function getNextCrawlTime(rangeTime = 900) {
     return new Date(now.getTime() + addTime);
 }
 exports.getNextCrawlTime = getNextCrawlTime;
+function nextProxy(current_index, proxies) {
+    current_index++;
+    if (current_index >= proxies.length) {
+        current_index = 0;
+    }
+    const proxy = proxies[current_index];
+    return proxy;
+}
+exports.nextProxy = nextProxy;
 //# sourceMappingURL=utils.js.map

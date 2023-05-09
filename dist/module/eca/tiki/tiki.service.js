@@ -30,6 +30,8 @@ let TikiService = class TikiService {
         this.logger = logger;
         this.mailService = mailService;
         this.product_item_buffer = [];
+        this.proxy_index = 0;
+        this.proxies = [];
     }
     async onModuleInit() {
         await this.findAll();

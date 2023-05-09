@@ -1,13 +1,12 @@
 import { Logger, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MailModule } from './module/mail/mail.module';
-import { TikiModule } from './module/eca/tiki/tiki.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from './config/mongoose.config';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ProductItem, ProductSchema } from 'entities';
+import { TikiModule, MailModule } from 'modules';
 
 @Module({
   imports: [

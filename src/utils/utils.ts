@@ -36,3 +36,12 @@ export function getNextCrawlTime(rangeTime = 900) {
   const now = new Date();
   return new Date(now.getTime() + addTime);
 }
+
+export function nextProxy(current_index: number, proxies: string[]): string {
+  current_index++;
+  if (current_index >= proxies.length) {
+    current_index = 0;
+  }
+  const proxy = proxies[current_index];
+  return proxy;
+}

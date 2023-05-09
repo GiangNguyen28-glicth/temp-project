@@ -10,6 +10,8 @@ export declare class TikiService implements OnModuleInit {
     private mailService;
     constructor(productModel: ProductModel, scraper: Scraper, logger: Logger, mailService: MailService);
     product_item_buffer: ProductItem[];
+    proxy_index: number;
+    proxies: string[];
     onModuleInit(): Promise<void>;
     filter(): Partial<FilterProductItem>;
     findAll(): Promise<void>;
