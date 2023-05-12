@@ -21,6 +21,7 @@ const scraper_1 = require("../../../scraper");
 const mapping_1 = require("../../../mapping");
 const entities_1 = require("../../../entities");
 const mail_service_1 = require("../../mail/mail.service");
+const schedule_1 = require("@nestjs/schedule");
 let TikiService = class TikiService {
     constructor(productModel, proxyModel, scraper, logger, mailService) {
         this.productModel = productModel;
@@ -118,7 +119,17 @@ let TikiService = class TikiService {
         entities.status = common_2.Status.IDLE;
         entities.crawled_date = new Date();
     }
+    async healCheck() {
+        const data = await this.scraper.requestWithGetMethod('https://temp-project-three.vercel.app/api/v1/health-check');
+        console.log(data);
+    }
 };
+__decorate([
+    (0, schedule_1.Cron)('* * * * * *	'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TikiService.prototype, "healCheck", null);
 TikiService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(entities_1.ProductItem.name)),

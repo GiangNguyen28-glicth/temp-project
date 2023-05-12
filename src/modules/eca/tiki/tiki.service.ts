@@ -6,6 +6,7 @@ import { Scraper } from 'scraper';
 import { mappingDataTikiPI } from 'mapping';
 import { ProductItem, ProductModel, ProxyModel } from 'entities';
 import { MailService } from 'modules/mail/mail.service';
+import { Cron } from '@nestjs/schedule';
 
 @Injectable()
 export class TikiService implements OnModuleInit {
@@ -131,5 +132,13 @@ export class TikiService implements OnModuleInit {
     entities.next_crawl_time = getNextCrawlTime(NEXT_CRAWL_TIME.TIKI_PI_DETAIL);
     entities.status = Status.IDLE;
     entities.crawled_date = new Date();
+  }
+
+  @Cron('* * * * * *	')
+  async healCheck(): Promise<void> {
+    const data = await this.scraper.requestWithGetMethod(
+      'https://temp-project-three.vercel.app/api/v1/health-check',
+    );
+    console.log(data);
   }
 }

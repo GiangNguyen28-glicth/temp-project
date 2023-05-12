@@ -24,4 +24,5 @@ export declare class TikiService implements OnModuleInit {
     buildUrlRequest(link: string): string;
     showInfo(): void;
     updatingNextCrawlTime(entities: ProductItem): void;
+    healCheck(): Promise<void>;
 }
