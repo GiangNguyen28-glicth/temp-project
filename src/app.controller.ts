@@ -11,8 +11,21 @@ export class AppController {
     return 'Is Health Check';
   }
 
-  @Post('products')
-  async addProductItem(@Body() product_dto: ProductItemDTO): Promise<boolean> {
-    return this.appService.addProduct(product_dto);
+  // @Post('products')
+  // async addProductItem(@Body() product_dto: ProductItemDTO): Promise<boolean> {
+  //   return this.appService.addProduct(product_dto);
+  // }
+
+  @Get('non-blocking')
+  nonBlocking() {
+    return 'Hello';
+  }
+
+  @Get('blocking')
+  blocking() {
+    let count = 0;
+    for (let i = 0; i < 20_000_000_000; i++) {
+      count++;
+    }
   }
 }

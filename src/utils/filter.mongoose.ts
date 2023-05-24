@@ -1,7 +1,12 @@
 import { SortOrder } from 'mongoose';
 import { transformTextSearch } from './utils';
-import { BuildQuery, QueryOperator } from 'common/interfaces/common';
 export type SortQuery = { [key: string]: SortOrder };
+export type BuildQuery = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  filter: Object;
+  sort: SortQuery;
+};
+export type QueryOperator = '$eq' | '$gte' | '$lte';
 
 export class FilterBuilder<T> {
   queryFilter: any = {

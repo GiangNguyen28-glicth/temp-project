@@ -11,18 +11,18 @@ import { MailModule } from 'modules/mail/mail.module';
 
 @Module({
   imports: [
-    TikiModule,
-    MailModule,
-    MongooseModule.forRootAsync({
-      useClass: MongooseConfigService,
-    }),
-    MongooseModule.forFeature([
-      { name: ProductItem.name, schema: ProductSchema },
-    ]),
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    ScheduleModule.forRoot(),
+    // TikiModule,
+    // MailModule,
+    // MongooseModule.forRootAsync({
+    //   useClass: MongooseConfigService,
+    // }),
+    // MongooseModule.forFeature([
+    //   { name: ProductItem.name, schema: ProductSchema },
+    // ]),
+    // ConfigModule.forRoot({
+    //   isGlobal: true,
+    // }),
+    // ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

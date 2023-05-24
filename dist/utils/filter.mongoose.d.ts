@@ -1,8 +1,12 @@
 import { SortOrder } from 'mongoose';
-import { BuildQuery, QueryOperator } from 'common/interfaces/common';
 export type SortQuery = {
     [key: string]: SortOrder;
 };
+export type BuildQuery = {
+    filter: Object;
+    sort: SortQuery;
+};
+export type QueryOperator = '$eq' | '$gte' | '$lte';
 export declare class FilterBuilder<T> {
     queryFilter: any;
     querySort: SortQuery;

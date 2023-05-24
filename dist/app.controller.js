@@ -8,15 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
-const product_item_dto_1 = require("./api/dto/product-item.dto");
 let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
@@ -24,8 +20,14 @@ let AppController = class AppController {
     healthCheck() {
         return 'Is Health Check';
     }
-    async addProductItem(product_dto) {
-        return this.appService.addProduct(product_dto);
+    nonBlocking() {
+        return 'Hello';
+    }
+    blocking() {
+        let count = 0;
+        for (let i = 0; i < 20000000000; i++) {
+            count++;
+        }
     }
 };
 __decorate([
@@ -36,13 +38,19 @@ __decorate([
     __metadata("design:returntype", String)
 ], AppController.prototype, "healthCheck", null);
 __decorate([
-    (0, common_1.Post)('products'),
-    openapi.ApiResponse({ status: 201, type: Boolean }),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)('non-blocking'),
+    openapi.ApiResponse({ status: 200, type: String }),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [product_item_dto_1.ProductItemDTO]),
-    __metadata("design:returntype", Promise)
-], AppController.prototype, "addProductItem", null);
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "nonBlocking", null);
+__decorate([
+    (0, common_1.Get)('blocking'),
+    openapi.ApiResponse({ status: 200 }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "blocking", null);
 AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])

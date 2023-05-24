@@ -4,14 +4,14 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api/v1');
-  const options = new DocumentBuilder()
-    .setTitle('Crawler')
-    .setDescription('The Crawler API description')
-    .setVersion('1.0')
-    .addTag('crawler')
-    .build();
-  const crawlerDocument = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api/v1/swagger', app, crawlerDocument);
+  // const options = new DocumentBuilder()
+  //   .setTitle('Crawler')
+  //   .setDescription('The Crawler API description')
+  //   .setVersion('1.0')
+  //   .addTag('crawler')
+  //   .build();
+  // const crawlerDocument = SwaggerModule.createDocument(app, options);
+  // SwaggerModule.setup('api/v1/swagger', app, crawlerDocument);
   await app.listen(3000);
 }
 bootstrap();
