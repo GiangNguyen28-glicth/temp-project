@@ -12,13 +12,16 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-hub-2', url: 'https://index.docker.io/v1/') {
-                    // sh 'docker build -t giangnt/temp-project:v1 .'
-                    // sh 'docker push -t giangnt/temp-project:v1 .'
-                    def dockerImage = docker.build("giangnt/temp-project",".")
-                    dockerImage.push()
-                    echo "Pushed Docker Image giangnt/temp-project Successfully"
+                container('docker') {
+                    withDockerRegistry(credentialsId: 'docker-hub-2', url: 'https://index.docker.io/v1/') {
+                        // sh 'docker build -t giangnt/temp-project:v1 .'
+                        // sh 'docker push -t giangnt/temp-project:v1 .'
+                        def dockerImage = docker.build("giangnt/temp-project",".")
+                        dockerImage.push()
+                        echo "Pushed Docker Image giangnt/temp-project Successfully"
+                    }
                 }
+                
             }
         }
         // Add more stages as needed
