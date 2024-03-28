@@ -8,7 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
+const rxjs_1 = require("rxjs");
 let AppService = class AppService {
+    constructor() {
+        this.notificationSubject = new rxjs_1.Subject();
+    }
+    sendNotification(message) {
+        this.notificationSubject.next(message);
+    }
+    getNotificationStream() {
+        return this.notificationSubject.asObservable();
+    }
 };
 AppService = __decorate([
     (0, common_1.Injectable)()

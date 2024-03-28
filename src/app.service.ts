@@ -1,10 +1,17 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { ProductItemDTO } from 'api/dto/product-item.dto';
-import { ProductItem, ProductModel } from 'entities';
+import { Injectable } from '@nestjs/common';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class AppService {
+  private notificationSubject: Subject<string> = new Subject<string>();
+
+  sendNotification(message: string) {
+    this.notificationSubject.next(message);
+  }
+
+  getNotificationStream(): Observable<string> {
+    return this.notificationSubject.asObservable();
+  }
   // constructor(
   //   @InjectModel(ProductItem.name) private productModel: ProductModel,
   //   private logger: Logger,

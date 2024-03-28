@@ -8,6 +8,10 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ProductItem, ProductSchema } from 'entities';
 import { TikiModule } from 'modules';
 import { MailModule } from 'modules/mail/mail.module';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { CrudImpl, CrudImplProvider } from 'crud.service.impl';
+import { CrudImplV2Provider } from 'crud.service-v2.impl';
 
 @Module({
   imports: [
@@ -23,8 +27,11 @@ import { MailModule } from 'modules/mail/mail.module';
     //   isGlobal: true,
     // }),
     // ScheduleModule.forRoot(),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '.', 'index.html'),
+    // }),
   ],
   controllers: [AppController],
-  providers: [AppService, Logger],
+  providers: [AppService, Logger, CrudImplProvider, CrudImplV2Provider],
 })
 export class AppModule {}

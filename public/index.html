@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Real-time Notifications</title>
+  </head>
+  <body>
+    <h1>Real-time Notifications</h1>
+    <div id="notification-container"></div>
+
+    <script>
+      const notificationContainer = document.getElementById(
+        'notification-container',
+      );
+
+      // Sử dụng EventSource để lắng nghe sự kiện real-time từ máy chủ
+      const eventSource = new EventSource('http://localhost:3000/api/v1/see');
+      eventSource.onmessage = ({ data }) => {
+        console.log('New message', JSON.parse(data));
+      };
+    </script>
+  </body>
+</html>
