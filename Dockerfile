@@ -3,19 +3,6 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    make \
-    g++ \
-    libjpeg-dev \
-    libcairo2-dev \
-    libgif-dev \
-    libpango1.0-dev \
-    libtool \
-    autoconf \
-    automake \
-    && rm -rf /var/lib/apt/lists/*
-
 RUN yarn install --frozen-lockfile
 
 COPY . .
