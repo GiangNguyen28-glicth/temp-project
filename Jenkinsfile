@@ -9,6 +9,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Clone Repository') {
+            steps {
+                withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
+                    sh 'docker build -t giangnt/temp-project:v1 .'
+                    sh 'docker push -t giangnt/temp-project:v1 .'
+                }
+            }
+        }
         // Add more stages as needed
     }
     
