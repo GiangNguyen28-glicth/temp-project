@@ -1,10 +1,4 @@
 pipeline {
-     environment { 
-        registry = "giangnguyen3246/temp-project"
-        registryCredential = 'docker-hub-2' 
-        dockerImage = ''
-    }
-
     agent any
     
     stages {
@@ -18,19 +12,10 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                script { 
-                    dockerImage = docker.build registry + ":v1"
-                } 
-            }
-        }
-
-        stage('Push Docker Images') {
-            steps {
-                script { 
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-                    }
-                } 
+                withDockerRegistry(credentialsId: 'docker-hub-2', url: 'https://index.docker.io/v1/') {
+                    sh 'docker build -t giangnguyen3246/temp-project:v1 .'
+                    sh 'docker push -t giangnguyen3246/temp-project:v1 .'
+                }
             }
         }
         // Add more stages as needed
