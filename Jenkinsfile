@@ -13,8 +13,9 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 withDockerRegistry(credentialsId: 'docker-hub-2', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t giangnt/temp-project:v1 .'
-                    sh 'docker push -t giangnt/temp-project:v1 .'
+                    def dockerfilePath = './Dockerfile'
+                    sh 'docker build -t giangnt/temp-project:v1 Dockerfile'
+                    sh 'docker push -t giangnt/temp-project:v1 Dockerfile'
                 }
             }
         }
