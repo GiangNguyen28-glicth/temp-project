@@ -1,24 +1,9 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Header,
-  Inject,
-  Post,
-  Req,
-  Res,
-  Sse,
-} from '@nestjs/common';
-import { AppService } from './app.service';
-import { ProductItemDTO } from 'api/dto/product-item.dto';
-import { Observable, interval, map } from 'rxjs';
-import { join } from 'path';
-import { readFileSync } from 'fs';
-import { Response } from 'express';
+import { Controller, Get, Inject, Req, Res } from '@nestjs/common';
 import { ICRUD } from 'common/interfaces/crud';
-import { CrudImpl } from 'crud.service.impl';
-import axios from 'axios';
-import { google } from 'googleapis';
+import { Response } from 'express';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { AppService } from './app.service';
 
 interface MessageEvent {
   data: string | object;
