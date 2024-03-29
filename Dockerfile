@@ -7,7 +7,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN yarn start:dev
+RUN yarn build
 
 FROM node:16.18.0-buster
 
