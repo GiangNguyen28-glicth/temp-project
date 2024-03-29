@@ -14,7 +14,7 @@ pipeline {
             steps {
                 withDockerRegistry(credentialsId: 'docker-hub-2', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t giangnguyen3246/temp-project:v1 .'
-                    sh 'docker push -t giangnguyen3246/temp-project:v1'
+                    sh 'docker push giangnguyen3246/temp-project:v1'
                 }
             }
         }
