@@ -1,36 +1,25 @@
-pipeline { 
-    environment { 
-        registry = "giangnguyen3246/temp-project" 
-        registryCredential = 'docker-hub-2' 
-        dockerImage = '' 
-    }
-    agent any 
-    stages { 
-        stage('Cloning our Git') { 
-            steps { 
-                git 'https://github.com/GiangNguyen28-glicth/temp-project' 
-            }
-        } 
-        stage('Building our image') { 
-            steps { 
-                script { 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+pipeline {
+    agent any
+    
+    stages {
+        stage('Clone Repository') {
+            steps {
+                script {
+                    git 'https://github.com/GiangNguyen28-glicth/temp-project'
                 }
-            } 
+            }
         }
-        stage('Deploy our image') { 
-            steps { 
-                script { 
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-                    }
-                } 
+
+        stage('Build Docker Images') {
+            steps {
+                withDockerRegistry(credentialsId: 'docker-hub-2', url: 'https://index.docker.io/v1/') {
+                    sh 'docker build -t giangnguyen3246/temp-project:v1 .'
+                    sh 'docker push -t giangnguyen3246/temp-project:v1 .'
+                }
             }
-        } 
-        stage('Cleaning up') { 
-            steps { 
-                sh "docker rmi $registry:$BUILD_NUMBER" 
-            }
-        } 
+        }
+        // Add more stages as needed
     }
+    
+    // Add post-build actions, etc.
 }
